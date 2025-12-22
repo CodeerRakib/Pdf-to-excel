@@ -1,8 +1,13 @@
-
 // Set worker source for pdf.js
 // @ts-ignore
-const pdfjsLib = window['pdfjs-dist/build/pdf'];
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const pdfjsLib = window.pdfjsLib || window['pdfjs-dist/build/pdf'];
+
+if (!pdfjsLib) {
+  console.error("PDF.js library failed to load from CDN. Ensure you have an internet connection.");
+} else {
+  // @ts-ignore
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
 
 export interface PDFTextItem {
   text: string;
@@ -14,6 +19,7 @@ export interface PDFTextItem {
 
 export async function extractPdfTextItems(file: File): Promise<PDFTextItem[][]> {
   const arrayBuffer = await file.arrayBuffer();
+  // @ts-ignore
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   const pagesItems: PDFTextItem[][] = [];
 
@@ -37,6 +43,7 @@ export async function extractPdfTextItems(file: File): Promise<PDFTextItem[][]> 
 
 export async function renderPageToImage(file: File, pageNumber: number): Promise<string> {
   const arrayBuffer = await file.arrayBuffer();
+  // @ts-ignore
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   const page = await pdf.getPage(pageNumber);
   
@@ -59,6 +66,7 @@ export async function renderPageToImage(file: File, pageNumber: number): Promise
 
 export async function getPdfPageCount(file: File): Promise<number> {
   const arrayBuffer = await file.arrayBuffer();
+  // @ts-ignore
   const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   return pdf.numPages;
 }
