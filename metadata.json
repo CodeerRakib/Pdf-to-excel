@@ -1,0 +1,5 @@
+{
+  "name": "PDF2Table Local",
+  "description": "A high-performance, privacy-focused web application that extracts structured data from PDFs using client-side JavaScript. No APIs, no subscriptions, 100% free and unlimited.",
+  "requestFramePermissions": []
+}
