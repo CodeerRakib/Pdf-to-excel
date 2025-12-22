@@ -49,22 +49,26 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, activeTab, se
       <aside className={`fixed top-0 left-0 h-full w-72 md:w-80 bg-slate-900 border-r border-slate-800 z-50 transform transition-transform duration-500 ease-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="p-6 h-full flex flex-col">
           <div className="flex items-center justify-between mb-10">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-slate-950">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            <button 
+              onClick={() => { setActiveTab('pdf-to-excel'); onClose(); }}
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+            >
+              <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <span className="text-xl font-black text-white tracking-tight">Converter</span>
-            </div>
+              <span className="text-2xl font-black text-white tracking-tight">Converter</span>
+            </button>
             <button onClick={onClose} className="p-2 text-slate-500 hover:text-white transition-colors">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
 
-          <nav className="flex-1 space-y-2">
+          <nav className="flex-1 space-y-1.5">
+            <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] mb-3 ml-2">Tools Marketplace</p>
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -75,7 +79,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, activeTab, se
                 className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl font-bold transition-all ${
                   activeTab === item.id 
                     ? 'bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/20' 
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                    : 'text-slate-400 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-700/50'
                 }`}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,10 +92,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, activeTab, se
 
           <div className="mt-auto pt-6 border-t border-slate-800">
             <div className="p-4 bg-slate-800/40 rounded-2xl border border-slate-700/50">
-              <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Status</p>
+              <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Security</p>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
-                <span className="text-xs text-slate-300 font-bold">Local Engine Online</span>
+                <svg className="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
+                </svg>
+                <span className="text-[10px] text-slate-300 font-bold uppercase tracking-tight">100% Client-Side Engine</span>
               </div>
             </div>
           </div>
