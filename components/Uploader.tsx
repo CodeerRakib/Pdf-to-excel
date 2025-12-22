@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface UploaderProps {
@@ -25,8 +24,8 @@ export const Uploader: React.FC<UploaderProps> = ({ onFilesSelected, disabled })
     <div 
       onDragOver={(e) => e.preventDefault()}
       onDrop={onDrop}
-      className={`relative border-2 border-dashed rounded-xl p-12 transition-all duration-200 text-center
-        ${disabled ? 'bg-gray-100 border-gray-300 cursor-not-allowed' : 'bg-white border-emerald-200 hover:border-emerald-400 cursor-pointer group'}
+      className={`relative border-2 border-dashed rounded-3xl p-10 md:p-16 transition-all duration-500 text-center
+        ${disabled ? 'bg-slate-900/50 border-slate-800 cursor-not-allowed grayscale' : 'bg-slate-900/30 border-slate-800 hover:border-emerald-500/50 hover:bg-emerald-500/[0.02] cursor-pointer group'}
       `}
     >
       <input 
@@ -37,20 +36,29 @@ export const Uploader: React.FC<UploaderProps> = ({ onFilesSelected, disabled })
         disabled={disabled}
         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed"
       />
-      <div className="space-y-4">
-        <div className="mx-auto w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-          <svg className="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+      <div className="space-y-6">
+        <div className="mx-auto w-20 h-20 bg-emerald-500/10 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-500 shadow-inner">
+          <svg className="w-10 h-10 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
           </svg>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold text-slate-800">Drop PDF Files Here</h3>
-          <p className="text-slate-500 mt-1">Supports Scanned Documents, Image PDFs & Digital Files.</p>
+        <div className="space-y-2">
+          <h3 className="text-2xl font-bold text-slate-100">Upload PDF Documents</h3>
+          <p className="text-slate-400 font-medium">Select multiple files or drag them into this workspace.</p>
         </div>
-        <div className="flex justify-center gap-2 flex-wrap">
-          <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded border">Local OCR Support</span>
-          <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded border">No Upload Limits</span>
-          <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded border">Works Offline</span>
+        <div className="flex justify-center gap-3 flex-wrap pt-4">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/80 text-slate-400 text-[10px] font-black uppercase tracking-widest rounded-lg border border-slate-700">
+            <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+            OCR Engine Ready
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/80 text-slate-400 text-[10px] font-black uppercase tracking-widest rounded-lg border border-slate-700">
+            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+            Private Processing
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/80 text-slate-400 text-[10px] font-black uppercase tracking-widest rounded-lg border border-slate-700">
+            <span className="w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
+            No File Limits
+          </div>
         </div>
       </div>
     </div>
