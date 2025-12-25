@@ -44,36 +44,32 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, activeTab, se
 
   return (
     <>
-      {/* Backdrop with fade-in effect */}
       <div 
         className={`fixed inset-0 bg-black/80 backdrop-blur-md z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={onClose}
       />
 
-      {/* Sidebar Panel - Fixed Layout */}
       <aside className={`fixed top-0 left-0 h-full w-72 md:w-80 bg-slate-950 border-r border-slate-900 z-50 transform transition-transform duration-500 ease-out flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="p-6 h-full flex flex-col min-h-0">
-          {/* Header section */}
           <div className="flex items-center justify-between mb-8 shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 bg-emerald-500 rounded-xl flex items-center justify-center text-slate-950 shadow-lg shadow-emerald-500/20">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <span className="text-xl font-black text-white tracking-tight">Converter</span>
+              <span className="text-xl font-black text-white tracking-tight uppercase">Studio</span>
             </div>
             <button onClick={onClose} className="p-2 text-slate-500 hover:text-white transition-colors">
-              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
             </button>
           </div>
 
-          {/* Navigation items in a clean vertical list */}
           <nav className="flex-1 overflow-y-auto space-y-1 pr-2 custom-scrollbar min-h-0">
-            <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] mb-4 ml-2">Main Menu</p>
+            <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] mb-4 ml-2">Conversion Suite</p>
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -87,7 +83,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, activeTab, se
                     : 'text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent'
                 }`}
               >
-                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+                <svg className="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   {item.icon}
                 </svg>
                 <span className="truncate text-sm">{item.label}</span>
@@ -95,17 +91,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, activeTab, se
             ))}
           </nav>
 
-          {/* Bottom Security Info */}
           <div className="mt-auto pt-6 border-t border-slate-900 shrink-0">
             <div className="p-4 bg-slate-900/40 rounded-2xl border border-slate-800 flex items-start gap-3">
               <div className="shrink-0 pt-0.5 text-emerald-500">
-                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
                 </svg>
               </div>
-              <div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Security</p>
-                <p className="text-[10px] text-slate-500 font-bold leading-tight uppercase">Local Engine Only • No Data Leaves Browser</p>
+              <div className="overflow-hidden">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Security Status</p>
+                <p className="text-[10px] text-slate-500 font-bold leading-tight uppercase truncate">Active • Client-Side Only</p>
               </div>
             </div>
           </div>
