@@ -35,40 +35,45 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, activeTab, se
       label: 'Image to Excel', 
       icon: <path d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /> 
     },
+    { 
+      id: 'tts', 
+      label: 'TTS Generator', 
+      icon: <path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /> 
+    },
   ];
 
   return (
     <>
-      {/* Backdrop */}
+      {/* Backdrop with fade-in effect */}
       <div 
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 bg-black/80 backdrop-blur-md z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={onClose}
       />
 
-      {/* Sidebar Panel */}
-      <aside className={`fixed top-0 left-0 h-full w-72 md:w-80 bg-slate-900 border-r border-slate-800 z-50 transform transition-transform duration-500 ease-out ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="p-6 h-full flex flex-col">
-          <div className="flex items-center justify-between mb-10">
-            <button 
-              onClick={() => { setActiveTab('pdf-to-excel'); onClose(); }}
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-            >
-              <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+      {/* Sidebar Panel - Fixed Layout */}
+      <aside className={`fixed top-0 left-0 h-full w-72 md:w-80 bg-slate-950 border-r border-slate-900 z-50 transform transition-transform duration-500 ease-out flex flex-col ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="p-6 h-full flex flex-col min-h-0">
+          {/* Header section */}
+          <div className="flex items-center justify-between mb-8 shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 bg-emerald-500 rounded-xl flex items-center justify-center text-slate-950 shadow-lg shadow-emerald-500/20">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <span className="text-2xl font-black text-white tracking-tight">Converter</span>
-            </button>
+              <span className="text-xl font-black text-white tracking-tight">Converter</span>
+            </div>
             <button onClick={onClose} className="p-2 text-slate-500 hover:text-white transition-colors">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
             </button>
           </div>
 
-          <nav className="flex-1 space-y-1.5">
-            <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] mb-3 ml-2">Tools Marketplace</p>
+          {/* Navigation items in a clean vertical list */}
+          <nav className="flex-1 overflow-y-auto space-y-1 pr-2 custom-scrollbar min-h-0">
+            <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em] mb-4 ml-2">Main Menu</p>
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -76,28 +81,31 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, activeTab, se
                   setActiveTab(item.id);
                   onClose();
                 }}
-                className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl font-bold transition-all ${
+                className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold transition-all group ${
                   activeTab === item.id 
-                    ? 'bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/20' 
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800 border border-transparent hover:border-slate-700/50'
+                    ? 'bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/10' 
+                    : 'text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent'
                 }`}
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
                   {item.icon}
                 </svg>
-                {item.label}
+                <span className="truncate text-sm">{item.label}</span>
               </button>
             ))}
           </nav>
 
-          <div className="mt-auto pt-6 border-t border-slate-800">
-            <div className="p-4 bg-slate-800/40 rounded-2xl border border-slate-700/50">
-              <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Security</p>
-              <div className="flex items-center gap-2">
-                <svg className="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 24 24">
+          {/* Bottom Security Info */}
+          <div className="mt-auto pt-6 border-t border-slate-900 shrink-0">
+            <div className="p-4 bg-slate-900/40 rounded-2xl border border-slate-800 flex items-start gap-3">
+              <div className="shrink-0 pt-0.5 text-emerald-500">
+                <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
                 </svg>
-                <span className="text-[10px] text-slate-300 font-bold uppercase tracking-tight">100% Client-Side Engine</span>
+              </div>
+              <div>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Security</p>
+                <p className="text-[10px] text-slate-500 font-bold leading-tight uppercase">Local Engine Only • No Data Leaves Browser</p>
               </div>
             </div>
           </div>
