@@ -1,6 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenAI, Modality } from "@google/genai";
 
+declare var process: {
+  env: {
+    API_KEY: string;
+  };
+};
+
 interface VoiceOption {
   id: string;
   name: string;
