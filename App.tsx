@@ -6,8 +6,9 @@ import { ExcelToPdf } from './components/ExcelToPdf';
 import { ImageToPdf } from './components/ImageToPdf';
 import { ImageToExcel } from './components/ImageToExcel';
 import { TtsModule } from './components/TtsModule';
+import { PdfToWord } from './components/PdfToWord';
 
-export type AppTab = 'pdf-to-excel' | 'edit-pdf' | 'excel-to-pdf' | 'image-to-pdf' | 'image-to-excel' | 'tts';
+export type AppTab = 'pdf-to-excel' | 'pdf-to-word' | 'edit-pdf' | 'excel-to-pdf' | 'image-to-pdf' | 'image-to-excel' | 'tts';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<AppTab>('pdf-to-excel');
@@ -26,6 +27,7 @@ const App: React.FC = () => {
   const renderContent = () => {
     switch (activeTab) {
       case 'pdf-to-excel': return <PdfToExcel />;
+      case 'pdf-to-word': return <PdfToWord />;
       case 'edit-pdf': return <EditPdf />;
       case 'excel-to-pdf': return <ExcelToPdf />;
       case 'image-to-pdf': return <ImageToPdf />;
@@ -38,6 +40,7 @@ const App: React.FC = () => {
   const getTabTitle = () => {
     switch (activeTab) {
       case 'pdf-to-excel': return 'PDF to Excel';
+      case 'pdf-to-word': return 'PDF to Word';
       case 'edit-pdf': return 'PDF Editor';
       case 'excel-to-pdf': return 'Excel to PDF';
       case 'image-to-pdf': return 'Image to PDF';
